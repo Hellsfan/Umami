@@ -1,0 +1,76 @@
+﻿@model Umami.Models.ViewModels.BlogPostEditorVM
+@{
+}
+<form class="" asp-action="Edit" method="post" enctype="multipart/form-data">
+    <h2 class="pb-10">Update Blog Post</h2>
+    <input type="hidden" class="input" asp-for="Id">
+    <input type="hidden" class="input" asp-for="PostImage">
+    <div class=" w-40">
+        <div class="input-container">
+            <label asp-for="Title" class="w-40">Title</label>
+            <input type="text" class="input" asp-for="Title">
+        </div>
+        <div class="message-box pd-x-28 error">
+            <span asp-validation-for="Title"> </span>
+        </div>
+
+        <div class="input-container">
+            <label asp-for="TypeOfPost" class="w-40">Category</label>
+            <input type="text" class="input" asp-for="TypeOfPost">
+        </div>
+        <div class="message-box pd-x-28 error">
+            <span asp-validation-for="TypeOfPost"> </span>
+        </div>
+
+        <div class="input-container">
+            <label asp-for="Description" class="w-40">Description</label>
+            <input type="text" class="input" asp-for="Description">
+        </div>
+        <div class="message-box pd-x-28 error">
+            <span asp-validation-for="Description"> </span>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Text" class="" style="padding-right:10%">Text</label>
+        <textarea asp-for="Text"></textarea>
+    </div>
+
+    <div class=" w-40">
+        <div class="input-container">
+            <label asp-for="ImageFile" class="w-40">Image</label>
+            <input type="file" asp-for="ImageFile">
+        </div>
+        <div class="message-box pd-x-28 error">
+            <span asp-validation-for="ImageFile"> </span>
+        </div>
+
+        <div class="input-container">
+            <label asp-for="RecipeId" class="w-40">Recipe</label>
+            <select asp-items="Model.RecipeList" class="input" asp-for="RecipeId">
+                @if (Model.RecipeId == -1)
+                {
+                    <option value="-1" selected>Blog Post without Recipe</option>
+                }
+                else
+                {
+                    <option value="-1">Blog Post without Recipe</option>
+                }
+            </select>
+        </div>
+        <div class="message-box pd-x-28 error">
+            <span asp-validation-for="RecipeId"> </span>
+        </div>
+    </div>
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert mb-1">
+            @TempData["msg"]
+        </div>
+    }
+
+    <div class="input-container">
+        <button class="btn btn-default" type="submit">Save</button>
+    </div>
+</form>

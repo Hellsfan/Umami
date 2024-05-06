@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Umami.Models.Domain.Product>
+@{
+}
+
+<div class="tbl-container">
+    <h2>Products</h2>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Alergen</th>
+            <th>Map Location</th>
+            <th>Action</th>
+        </tr>
+        @foreach(var item in Model){
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Alergen</td>
+            <td>@item.MapLocation</td>
+            <td>
+                <a href="/Product/Edit?id=@item.Id" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                    <a onclick="return window.confirm('Are you sure?')" href="/Product/Delete?id=@item.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+        }
+     
+    </table>
+    <div class="input-container">
+        <a href="/Product/Add" class="btn btn-sec">Back</a>
+    </div>
+</div>

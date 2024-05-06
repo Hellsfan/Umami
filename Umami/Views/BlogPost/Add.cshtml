@@ -1,0 +1,69 @@
+﻿@model Umami.Models.ViewModels.BlogPostEditorVM
+@{
+}
+
+<form class="" asp-action="Add" method="post" enctype="multipart/form-data">
+    <h2 class="pb-10">Create Blog Post</h2>
+
+    <div class="w-40">
+        <div class="input-container">
+            <label asp-for="Title" class="w-40">Title</label>
+            <input type="text" class="input" asp-for="Title">
+        </div>
+        <div class="message-box pd-x-28 error">
+            <span asp-validation-for="Title"> </span>
+        </div>
+
+        <div class="input-container">
+            <label asp-for="TypeOfPost" class="w-40">Category</label>
+            <input type="text" class="input" asp-for="TypeOfPost">
+        </div>
+        <div class="message-box pd-x-28 error">
+            <span asp-validation-for="TypeOfPost"> </span>
+        </div>
+
+        <div class="input-container">
+            <label asp-for="Description" class="w-40">Description</label>
+            <input type="text" class="input" asp-for="Description">
+        </div>
+        <div class="message-box pd-x-28 error">
+            <span asp-validation-for="Description"> </span>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Text" class="" style="padding-right:10%">Text</label>
+        <textarea asp-for="Text"></textarea>
+    </div>
+
+    <div class="w-40">
+        <div class="input-container">
+            <label asp-for="ImageFile" class="w-40">Image</label>
+            <input type="file" asp-for="ImageFile">
+        </div>
+        <div class="message-box pd-x-28 error">
+            <span asp-validation-for="ImageFile"> </span>
+        </div>
+
+        <div class="input-container">
+            <label asp-for="RecipeId" class="w-40">Recipe</label>
+            <select asp-items="Model.RecipeList" class="input" asp-for="RecipeId">
+                <option value="-1">Blog Post without Recipe</option>
+            </select>
+        </div>
+        <div class="message-box pd-x-28 error">
+            <span asp-validation-for="RecipeId"> </span>
+        </div>
+    </div>
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert mb-1">
+            @TempData["msg"]
+        </div>
+    }
+
+    <div class="input-container">
+        <button class="btn btn-default" type="submit">Save</button>
+    </div>
+</form>

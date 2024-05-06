@@ -1,0 +1,57 @@
+﻿@model Umami.Models.Domain.Review
+@{
+}
+
+<form class="w-40" style="display: flex;flex-direction: column;align-items: center;" asp-action="Add" method="post">
+    <h2 class="pb-10">Did you enjoy this recipe?</h2>
+@*     <div class="input-container">
+        <label asp-for="Stars" class="">Rate the recipe from 1 - 5</label>
+        <input type="radio" style="content:\f005";" class="input" asp-for="Stars" value="1">
+        <input type="radio" class="input" asp-for="Stars" value="2">
+        <input type="radio" class="input" asp-for="Stars" value="3">
+        <input type="radio" class="input" asp-for="Stars" value="4">
+        <input type="radio" class="input" asp-for="Stars" value="5">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Stars"> </span>
+    </div> *@
+
+    <input type="hidden" asp-for="RecipeId" value="@Model.RecipeId" />
+    <input type="hidden" asp-for="CreatedByUser" value="@User.Identity.Name" />
+
+    <div class="rating">
+
+        <input type="radio" id="star5" asp-for="Stars" value="5" />
+        <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+        <input type="radio" id="star4" asp-for="Stars" value="4" />
+        <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+        <input type="radio" id="star3" asp-for="Stars" value="3" />
+        <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+        <input type="radio" id="star2" asp-for="Stars" value="2" />
+        <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+        <input type="radio" id="star1" asp-for="Stars" value="1" />
+        <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Stars"> </span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Text" style="width:10%">Review</label>
+        <input type="text" class="input" asp-for="Text">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Text"> </span>
+    </div>
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert mb-1">
+            @TempData["msg"]
+        </div>
+    }
+
+    <div class="input-container">
+        <button class="btn btn-default" type="submit">Save</button>
+    </div>
+</form>

@@ -1,0 +1,42 @@
+﻿@model Umami.Models.ViewModels.BlogPostDetailVM
+@{
+}
+<div class="post-detail w-80 m-auto">
+    <div class="img-container">
+        <img alt="image" src="/Uploads/@Model.PostImage">
+    </div>
+
+    <div class="detail-container">
+        <h3>@Model.Title</h3>
+        <h3>@Model.TypeOfPost</h3>
+        <h4>@Model.Description</h4>
+        @Html.Raw(Model.Text)
+        <h4>Post created by @Model.CreatedByUser</h4>
+    </div>
+</div>
+<div class="w-80 m-auto">
+    <a href="/Home/Index" class="btn btn-default">Back</a>
+    @if (Model.RecipeId != -1)
+    {
+        <a href="/Recipe/CookRecipe?recipeId=@Model.RecipeId" class="btn btn-success">I'm cooking this today!</a>
+        @if (Model.RecipeStars != -1)
+        {
+            <h2 style="display:inline">@Model.RecipeStars / 5 stars given by other users!</h2>
+            <h2 style="padding-top:1%; padding-bottom:2%; justify-content:center; display:flex">Reviews for this Recipe:</h2>
+        }
+        <div style="display: grid;justify-items: center;justify-content: start;grid-template-columns: 20% 20% 20%;grid-row-gap: 20%;grid-column-gap: 20%;">
+            @foreach (var review in Model.Reviews)
+            {
+                <div style="display: flex;flex-direction: column;align-items: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                    </svg>
+                    <i class="bi bi-person"></i>
+                    <h2>@review.CreatedByUser:</h2>
+                    <h2 style="">@review.Text</h2>
+                </div>
+            }
+        </div>
+    }
+</div>

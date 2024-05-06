@@ -1,0 +1,31 @@
+﻿@model Umami.Models.ViewModels.CookingRecipeVM
+@{
+}
+<div class="post-detail w-80 m-auto">
+    <div class="img-container" style="padding-right:2%">
+        <img alt="image" src="/Uploads/@Model.RecipeImage">
+    </div>
+
+    <div style="display: flex;flex-direction: column;width:100%">
+        <div class="detail-container">
+            <h3 style="text-align:center">@Model.Name</h3>
+            <h3 style="text-align:center">@Model.Description</h3>
+        </div>
+
+        <div style="width:100%;display: flex;flex-direction: column;">
+            @for (int i = 0; i < Model.ListOfProducts.Count; i++)
+            {
+                string evenOrOdd = i % 2 == 0 ? "even" : "odd";
+                <div class="@evenOrOdd" style="display:flex;padding-bottom:2%;width:100%;flex-direction: row;justify-content: space-between;">
+                    <input type="checkbox">
+                    <label style="padding-left:5%;font-size:larger" class="strikethrough">@Model.ProductAmounts[i]</label>
+                    <a style="float:right" href="https://www.google.com/maps/search/@Model.ListOfProducts[i].MapLocation" target="_blank" class="btn btn-success">Find on map</a>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+<div class="w-80 m-auto">
+    <a href="/Recipe/CookRecipeInstructions?recipeId=@Model.Id" class="btn btn-success">Next Step</a>
+</div>

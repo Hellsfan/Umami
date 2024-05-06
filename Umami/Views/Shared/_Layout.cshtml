@@ -1,0 +1,75 @@
+﻿@{
+    string username = User.Identity.Name;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umami</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/w32ci2n8xcgrkqjra6t7getwtmo1eh3okjhhij68xp6hjuxz/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+    </script>
+</head>
+<body>
+    <nav class="nav-bar" style="justify-content:right; padding-right:3%">
+        <div class="logo">
+            UMAMI
+        </div>
+        <ul class="nav-link">
+            <li><a class="active" href="/Home/Index">Home</a></li>
+            <li><a href="/Home/About">About</a></li>
+            @if (!string.IsNullOrEmpty(username))
+            {
+                <li>
+                    <a href="#">@username <i class="fa fa-caret-down"></i></a>
+
+                    <ul class="dropdown-nav-link">
+                        <li><a href="/BlogPost/Add">Create a Post</a></li>
+                        <li><a href="/BlogPost/BlogPostList">Manage my Posts</a></li>
+                        <li>----------</li>
+                        <li><a href="/Product/Add">Create a Product</a></li>
+                        <li><a href="/Product/ProductList">Manage Products</a></li>
+                        <li>----------</li>
+                        <li><a href="/Recipe/Add">Create a Recipe</a></li>
+                        <li><a href="/Recipe/RecipeList">Manage Recipes</a></li>
+                        <li>----------</li>
+                        <li><a href="/UserAuthentication/Logout">Logout</a></li>
+                    </ul>
+                </li>
+            }
+
+            @if (string.IsNullOrEmpty(username))
+            {
+                <li><a href="/UserAuthentication/Login">Login</a></li>
+                <li><a href="/UserAuthentication/Register">Register</a></li>
+            }
+        </ul>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+</html>

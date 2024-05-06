@@ -1,0 +1,19 @@
+﻿@model Umami.Models.ViewModels.CookingRecipeVM
+@{
+}
+<div class="post-detail w-80 m-auto">
+    <div class="img-container">
+        <img alt="image" src="/Uploads/@Model.RecipeImage">
+    </div>
+
+    <div class="detail-container">
+        <h3>@Model.Name</h3>
+        <h3>@Model.Description</h3>
+        <h3><span style="color:red">Alergens:</span> @Model.alergensToString</h3>
+        <h4>Recipe created by @Model.CreatedByUser</h4>
+    </div>
+</div>
+<div class="w-80 m-auto">
+    <a href="/Home/Index" class="btn btn-default">Back</a>
+    <a href="/Recipe/CookRecipeProducts?recipeId=@Model.Id" class="btn btn-success">Next Step</a>
+</div>
