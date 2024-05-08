@@ -20,13 +20,14 @@ namespace Umami.Services.Implementations
                 context.BlogPost.Add(model);
                 context.SaveChanges();
 
-                if(model.RecipeId != null)
+                if(model.RecipeId != -1)
                 {
                     var blogPostRecipe = new BlogPostRecipe
                     {
                         BlogPostId = model.Id,
                         RecipeId = (int)model.RecipeId
                     };
+                    context.BlogPostRecipe.Add(blogPostRecipe);
                 }
 
                 context.SaveChanges();
